@@ -33,8 +33,8 @@ export default function App() {
     const inputElement = form.elements[0] as HTMLInputElement;
     const playerName = inputElement.value;
     !state.playerX
-      ? setState('playerX', new PlayerClass(playerName, 'X', board)) :
-      setState('playerO', new PlayerClass(playerName, 'O', board));
+      ? setState('playerX', new PlayerClass(playerName, 'X', board))
+      : setState('playerO', new PlayerClass(playerName, 'O', board));
     inputElement.value = ''; // empty form input element
   }
 
