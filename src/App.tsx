@@ -1,20 +1,49 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import BoardClass from './classes/Board';
+import PlayerClass from './classes/Player';
 
 export default function App() {
 
   // create a state - an object
   // in which can update each property as we want
   // by calling setState
+
   const [state, _setState] = useState({
-    board: new BoardClass(() => setState())
+    board: new BoardClass(() => setState()),
+    playerX: null,
+    playerO: null
   });
+
+  console.log(state);
 
   const setState = (prop: string = '', value: any = '') => {
     _setState({ ...state, [prop]: value });
   }
 
-  const { board } = state;
+  const { board, playerX, playerO } = state;
+
+  function registerName(event: FormEvent<HTMLFormElement>) {
+    // don't reload the page
+    event.preventDefault();
+
+    const form: any = event.target;
+    console.log(form.elements);
+    const playerXname = form.elements.playerXname?.value;
+    const playerOname = form.elements.playerOname?.value;
+    playerXname && setState('playerX', new PlayerClass(playerXname, 'X', board));
+    playerOname && setState('playerO', new PlayerClass(playerOname, 'O', board));
+    form.elements[0].value = '';
+  }
+
+  if (!playerX || !playerO) {
+    let whoseName = !playerX ? 'X' : 'O';
+    return <form onSubmit={registerName}>
+      <label>
+        Please enter your name, player {whoseName}:
+        <input name={'player' + whoseName + 'name'} placeholder={'Name of player ' + whoseName} />
+      </label>
+    </form>
+  }
 
   return <>
     {board.render()}
