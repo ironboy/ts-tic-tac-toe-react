@@ -29,7 +29,7 @@ export default function App() {
     const playerOname = form.elements.playerOname?.value;
     playerXname && setState('playerX', new PlayerClass(playerXname, 'X', board));
     playerOname && setState('playerO', new PlayerClass(playerOname, 'O', board));
-    form.elements[0].value = '';
+    form.elements[0].value = ''; // empty form input element
   }
 
   if (!playerX || !playerO) {
