@@ -4,20 +4,20 @@ import PlayerClass from './classes/Player';
 
 export default function App() {
 
-  // create a state - an object
-  // in which can update each property as we want
-  // by calling setState
-
-  const [state, _setState] = useState({
+  // create a state - an object in which can update 
+  // each property as we want by calling setState
+  // (note the use of let instead of const
+  //  so that the state updates incrementally, inbetween
+  //  renders if several properties change as once)
+  let [state, _setState] = useState({
     board: new BoardClass(),
     playerX: null,
     playerO: null
-  })
-
-  // you never know what type of value you might set 
-  // as a property in state, so  therefore value is type "any"
+  });
+  // we intentionally allow setting a prop with any type of value!
   const setState = (prop: string = '', value: any = '') => {
-    _setState({ ...state, [prop]: value });
+    state = { ...state, [prop]: value };
+    _setState(state);
   }
 
   // add the setState function to the board
@@ -29,12 +29,28 @@ export default function App() {
 
   function registerName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // don't reload the page
-    const form: any = event.target; // any since we are not sure of which form elements exists
-    const playerXname = form.elements.playerXname?.value;
-    const playerOname = form.elements.playerOname?.value;
-    playerXname && setState('playerX', new PlayerClass(playerXname, 'X', board));
-    playerOname && setState('playerO', new PlayerClass(playerOname, 'O', board));
-    form.elements[0].value = ''; // empty form input element
+    const form = event.target as HTMLFormElement;
+    const inputElement = form.elements[0] as HTMLInputElement;
+    const playerName = inputElement.value;
+    !state.playerX
+      ? setState('playerX', new PlayerClass(playerName, 'X', board)) :
+      setState('playerO', new PlayerClass(playerName, 'O', board));
+    inputElement.value = ''; // empty form input element
+  }
+
+  function playAgain() {
+    let pX = playerX as any as PlayerClass;
+    let pO = playerO as any as PlayerClass;
+    // it seems fair to switch who starts
+    [pX.name, pO.name] = [pO.name, pX.name];
+    // play another game
+    board.reset();
+  }
+
+  function newGameWithNewPlayers() {
+    setState('playerX', null);
+    setState('playerO', null);
+    playAgain();
   }
 
   if (!playerX || !playerO) {
@@ -59,8 +75,11 @@ export default function App() {
         It's a tie.
       </>}
       <br />
-      <button onClick={() => board.reset()}>
+      <button onClick={playAgain}>
         Play again?
+      </button><br />
+      <button onClick={newGameWithNewPlayers}>
+        New game with new players?
       </button>
     </div>}
   </>;
