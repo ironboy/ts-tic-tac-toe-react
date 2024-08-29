@@ -14,8 +14,8 @@ export default function App() {
     playerO: null
   })
 
-  // you never know what type of value you might set as a propert in state
-  // there value is type "any"
+  // you never know what type of value you might set 
+  // as a property in state, so  therefore value is type "any"
   const setState = (prop: string = '', value: any = '') => {
     _setState({ ...state, [prop]: value });
   }
