@@ -34,6 +34,10 @@ body {
   font-family: 'Rock Salt';
 }
 
+.column:not(.X, .O) {
+  cursor: pointer;
+}
+
 .column:nth-child(odd) {
   background-color: rgb(25, 67, 158);
 }
@@ -47,14 +51,12 @@ body {
   width: 100%;
   position: absolute;
   color: white;
-  font-size: min(14vh, 14vw);
+  font-size: min(10vh, 10vw);
   text-align: center;
-  top: min(-3vh, -3vw);
 }
 
 .column.X::before {
   content: 'X';
-  top: min(-3vh, -3vw);
 }
 
 .column.O::before {
