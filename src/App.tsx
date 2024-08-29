@@ -9,16 +9,19 @@ export default function App() {
   // by calling setState
 
   const [state, _setState] = useState({
-    board: new BoardClass(() => setState()),
+    board: new BoardClass(),
     playerX: null,
     playerO: null
-  });
+  })
 
   console.log(state);
 
   const setState = (prop: string = '', value: any = '') => {
+    console.log("STATE BEFORE CHANGE", state);
     _setState({ ...state, [prop]: value });
   }
+  // update the stateUpdater in board between each render
+  state.board.stateUpdater = setState;
 
   const { board, playerX, playerO } = state;
 

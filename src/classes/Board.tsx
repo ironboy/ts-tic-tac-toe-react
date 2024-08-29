@@ -9,8 +9,7 @@ export default class Board {
   winner: string | boolean;
   stateUpdater: Function;
 
-  constructor(stateUpdater: Function) {
-    this.stateUpdater = stateUpdater;
+  constructor() {
     this.reset(false);
   }
 
