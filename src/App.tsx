@@ -17,13 +17,17 @@ export default function App() {
   console.log(state);
 
   const setState = (prop: string = '', value: any = '') => {
-    console.log("STATE BEFORE CHANGE", state);
     _setState({ ...state, [prop]: value });
   }
+
   // update the stateUpdater in board between each render
-  state.board.stateUpdater = setState;
+  // (this has mainly todo with how React works in strict mode)
+  if (state.board.stateUpdater !== setState) {
+    state.board.stateUpdater = setState;
+  }
 
   const { board, playerX, playerO } = state;
+  const currentPlayer: any = board.currentPlayerColor === 'X' ? playerX : playerO;
 
   function registerName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // don't reload the page
@@ -48,9 +52,11 @@ export default function App() {
 
   return <>
     {board.render()}
-    {!board.gameOver ? null : <div className="info">
+    {!board.gameOver ? <div className="info">
+      {currentPlayer.name}'s turn... {board.currentPlayerColor}
+    </div> : <div className="info">
       {board.winner ? <>
-        {board.winner} has won.
+        {currentPlayer.name} ({board.winner}) has won.
       </> : <>
         It's a tie.
       </>}
