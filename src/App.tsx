@@ -20,11 +20,9 @@ export default function App() {
     _setState({ ...state, [prop]: value });
   }
 
-  // update the stateUpdater in board between each render
-  // (this has mainly todo with how React works in strict mode)
-  if (state.board.stateUpdater !== setState) {
-    state.board.stateUpdater = setState;
-  }
+  // add the setState function to the board
+  // (keep it fresh by adding it after each render)
+  state.board.stateUpdater = setState;
 
   const { board, playerX, playerO } = state;
   const currentPlayer: PlayerClass | null = board.currentPlayerColor === 'X' ? playerX : playerO;
