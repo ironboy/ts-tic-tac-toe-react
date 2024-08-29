@@ -35,8 +35,9 @@ export default function App() {
   if (!playerX || !playerO) {
     let whoseName = !playerX ? 'X' : 'O';
     return <form onSubmit={registerName}>
+      <h1>Welcome to Tic-Tac-Toe!</h1>
       <label>
-        Please enter your name, player {whoseName}:
+        <p>Please enter your name, player {whoseName}:</p>
         <input name={'player' + whoseName + 'name'} placeholder={'Name of player ' + whoseName} />
       </label>
     </form>

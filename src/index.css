@@ -74,3 +74,12 @@ button {
   margin-top: 20px;
   cursor: pointer;
 }
+
+form {
+  text-align: center;
+  font-size: 30px;
+}
+
+input {
+  font-size: 30px;
+}
