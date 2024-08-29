@@ -61,11 +61,13 @@ export default class Board {
 
     // make the move
     this.matrix[row][column] = color;
-    // change the current player color
-    this.currentPlayerColor = this.currentPlayerColor === 'X' ? 'O' : 'X';
     // check if someone has won or if it's a draw/tie and update properties
     this.winner = this.winCheck();
     this.isADraw = this.drawCheck();
+    // change the current player color
+    if (!this.winner && !this.isADraw) {
+      this.currentPlayerColor = this.currentPlayerColor === 'X' ? 'O' : 'X';
+    }
     // the game is over if someone has won or if it's a draw
     this.gameOver = !!(this.winner || this.isADraw);
     // call the stateUpdater if the move could be made

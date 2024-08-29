@@ -14,8 +14,8 @@ export default function App() {
     playerO: null
   })
 
-  console.log(state);
-
+  // you never know what type of value you might set as a propert in state
+  // there value is type "any"
   const setState = (prop: string = '', value: any = '') => {
     _setState({ ...state, [prop]: value });
   }
@@ -27,11 +27,11 @@ export default function App() {
   }
 
   const { board, playerX, playerO } = state;
-  const currentPlayer: any = board.currentPlayerColor === 'X' ? playerX : playerO;
+  const currentPlayer: PlayerClass | null = board.currentPlayerColor === 'X' ? playerX : playerO;
 
   function registerName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // don't reload the page
-    const form: any = event.target;
+    const form: any = event.target; // any since we are not sure of which form elements exists
     const playerXname = form.elements.playerXname?.value;
     const playerOname = form.elements.playerOname?.value;
     playerXname && setState('playerX', new PlayerClass(playerXname, 'X', board));
@@ -53,10 +53,10 @@ export default function App() {
   return <>
     {board.render()}
     {!board.gameOver ? <div className="info">
-      {currentPlayer.name}'s turn... {board.currentPlayerColor}
+      {currentPlayer!.name}'s turn... {board.currentPlayerColor}
     </div> : <div className="info">
       {board.winner ? <>
-        {currentPlayer.name} ({board.winner}) has won.
+        {currentPlayer!.name} ({board.winner}) has won.
       </> : <>
         It's a tie.
       </>}
