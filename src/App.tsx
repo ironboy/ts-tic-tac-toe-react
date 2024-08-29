@@ -25,7 +25,6 @@ export default function App() {
   function registerName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // don't reload the page
     const form: any = event.target;
-    console.log(form.elements);
     const playerXname = form.elements.playerXname?.value;
     const playerOname = form.elements.playerOname?.value;
     playerXname && setState('playerX', new PlayerClass(playerXname, 'X', board));
