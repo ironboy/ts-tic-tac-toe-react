@@ -34,7 +34,6 @@ body {
   font-family: 'Rock Salt';
 }
 
-
 .column:nth-child(odd) {
   background-color: rgb(25, 67, 158);
 }
