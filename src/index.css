@@ -18,7 +18,7 @@ body {
 .board {
   aspect-ratio: 1/1;
   margin: 0 auto;
-  width: min(90vh, 90vw);
+  width: min(70vh, 70vw);
   margin-top: min(5vh, 5vw);
   border-bottom: 1px solid #fff;
   border-left: 1px solid #fff;
@@ -47,16 +47,30 @@ body {
   width: 100%;
   position: absolute;
   color: white;
-  font-size: min(18vh, 18vw);
+  font-size: min(14vh, 14vw);
   text-align: center;
   top: min(-3vh, -3vw);
 }
 
 .column.X::before {
   content: 'X';
-  top: min(-4vh, -4vw);
+  top: min(-3vh, -3vw);
 }
 
 .column.O::before {
   content: 'O';
+}
+
+.info {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+button {
+  font-family: 'Roboto';
+  font-size: 24px;
+  display: inline-block;
+  margin-top: 20px;
+  cursor: pointer;
 }

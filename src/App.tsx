@@ -14,11 +14,20 @@ export default function App() {
     _setState({ ...state, [prop]: value });
   }
 
-  if (state.board.winner) {
-    alert(state.board.winner + ' has won');
-  }
+  const { board } = state;
 
   return <>
-    {state.board.render()}
+    {board.render()}
+    {!board.gameOver ? null : <div className="info">
+      {board.winner ? <>
+        {board.winner} has won.
+      </> : <>
+        It's a tie.
+      </>}
+      <br />
+      <button onClick={() => board.reset()}>
+        Play again?
+      </button>
+    </div>}
   </>;
 }

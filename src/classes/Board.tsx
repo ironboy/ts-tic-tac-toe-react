@@ -9,9 +9,12 @@ export default class Board {
   winner: string | boolean;
   stateUpdater: Function;
 
-
   constructor(stateUpdater: Function) {
     this.stateUpdater = stateUpdater;
+    this.reset(false);
+  }
+
+  reset(realReset: boolean = true) {
     this.matrix = [...new Array(3)].map(_row =>
       [...new Array(3)].map(_column => ' ')
     );
@@ -21,6 +24,7 @@ export default class Board {
     this.winner = false;
     this.isADraw = false;
     this.gameOver = false;
+    realReset && this.stateUpdater();
   }
 
   // render = output/draw something
