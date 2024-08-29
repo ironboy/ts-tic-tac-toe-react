@@ -1,0 +1,63 @@
+/* Google Fonts - Roboto and Rock Salt */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rock+Salt&display=swap');
+
+/* box-sizing (inlcude padding and borders in widths and heights */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Roboto';
+}
+
+.board {
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  width: min(90vh, 90vw);
+  margin-top: min(5vh, 5vw);
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+
+.column {
+  aspect-ratio: 1/1;
+  position: relative;
+  float: left;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  width: 33.33%;
+  font-family: 'Rock Salt';
+}
+
+
+.column:nth-child(odd) {
+  background-color: rgb(25, 67, 158);
+}
+
+.column:nth-child(even) {
+  background-color: rgb(179, 29, 29);
+}
+
+.column::before {
+  content: '';
+  width: 100%;
+  position: absolute;
+  color: white;
+  font-size: min(18vh, 18vw);
+  text-align: center;
+  top: min(-3vh, -3vw);
+}
+
+.column.X::before {
+  content: 'X';
+  top: min(-4vh, -4vw);
+}
+
+.column.O::before {
+  content: 'O';
+}
