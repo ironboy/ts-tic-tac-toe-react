@@ -1,24 +1,26 @@
-import { useState, FormEvent } from 'react';
+import { FormEvent } from 'react';
+import useStateObject from './utils/useStateObject';
 import BoardClass from './classes/Board';
 import PlayerClass from './classes/Player';
 
 export default function App() {
+
+  interface State {
+    board: BoardClass;
+    playerX: PlayerClass | null;
+    playerO: PlayerClass | null;
+  }
 
   // create a state - an object in which can update 
   // each property as we want by calling setState
   // (note the use of let instead of const
   //  so that the state updates incrementally, inbetween
   //  renders if several properties change as once)
-  let [state, _setState] = useState({
+  let [state, setState] = useStateObject<State>({
     board: new BoardClass(),
     playerX: null,
     playerO: null
   });
-  // we intentionally allow setting a prop with any type of value!
-  const setState = (prop: string = '', value: any = '') => {
-    state = { ...state, [prop]: value };
-    _setState(state);
-  }
 
   // add the setState function to the board
   // (keep it fresh by adding it after each render)
